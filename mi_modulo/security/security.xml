@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Grupo con permisos de lectura y escritura -->
+    <record id="group_mi_modulo_user" model="res.groups">
+        <field name="name">Usuario de Mi Módulo</field>
+        <field name="category_id" ref="base.module_category_sge_mi_modulo"/>
+        <field name="comment">Usuarios con acceso limitado (solo lectura y edición).</field>
+    </record>
+
+    <!-- Grupo con todos los permisos -->
+    <record id="group_mi_modulo_admin" model="res.groups">
+        <field name="name">Administrador de Mi Módulo</field>
+        <field name="category_id" ref="base.module_category_sge_mi_modulo"/>
+        <field name="comment">Usuarios con acceso total al módulo.</field>
+    </record>
+
+</odoo>
+

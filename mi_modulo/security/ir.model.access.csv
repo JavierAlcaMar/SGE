@@ -1,2 +1,4 @@
-id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_mi_modulo_mi_modulo,mi_modulo.mi_modulo,model_mi_modulo_mi_modulo,base.group_user,1,1,1,1
+id,name,model_id/id,group_id/id,perm_read,perm_write,perm_create,perm_unlink
+access_mi_modulo_ejemplo_user,mi_modulo.ejemplo.user,model_mi_modulo_ejemplo,mi_modulo.group_mi_modulo_user,1,1,0,0
+access_mi_modulo_ejemplo_admin,mi_modulo.ejemplo.admin,model_mi_modulo_ejemplo,mi_modulo.group_mi_modulo_admin,1,1,1,1
+access_mi_modulo_ejemplo_sin_permisos,mi_modulo.ejemplo_sin_permisos,model_mi_modulo_ejemplo,,0,0,0,0

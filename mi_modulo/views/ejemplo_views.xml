@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- VISTA TREE  -->
+    <record id="view_ejemplo_tree" model="ir.ui.view">
+        <field name="name">mi_modulo.ejemplo.list</field>
+        <field name="model">mi_modulo.ejemplo</field>
+        <field name="arch" type="xml">
+            <list string="Ejemplos">
+                <field name="name"/>
+                <field name="edad"/>
+                <field name="activo"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- VISTA FORM  -->
+    <record id="view_ejemplo_form" model="ir.ui.view">
+        <field name="name">mi_modulo.ejemplo.form</field>
+        <field name="model">mi_modulo.ejemplo</field>
+        <field name="arch" type="xml">
+            <form string="Ejemplo">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="edad"/>
+                        <field name="activo"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- ACCIÓN  -->
+    <record id="action_ejemplo" model="ir.actions.act_window">
+        <field name="name">Ejemplos</field>
+        <field name="res_model">mi_modulo.ejemplo</field>
+        <field name="view_mode">list,form</field>
+        <field name="view_id" ref="view_ejemplo_tree"/>
+    </record>
+    
+    <!-- MENÚS  -->
+    <menuitem id="menu_root_ejemplo" name="Gestión Ejemplo"/>
+    <menuitem id="menu_sub_ejemplo" name="Datos de Ejemplo" parent="menu_root_ejemplo"/>
+    <menuitem id="menu_action_ejemplo" name="Registros Ejemplo" parent="menu_sub_ejemplo" action="action_ejemplo"/>
+
+</odoo>

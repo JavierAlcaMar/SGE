@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- ========================
+         Vista formulario de componentes
+    ========================= -->
+    <record id="view_componente_form" model="ir.ui.view">
+        <field name="name">pc.componente.form</field>
+        <field name="model">pc.componente</field>
+        <field name="arch" type="xml">
+            <form string="Componente">
+                <sheet>
+                    <group>
+                        <field name="nombre"/>
+                        <field name="especificaciones"/>
+                        <field name="precio"/>
+                        <field name="currency_id"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- ========================
+         Vista lista de componentes
+    ========================= -->
+    <record id="view_componente_list" model="ir.ui.view">
+        <field name="name">pc.componente.list</field>
+        <field name="model">pc.componente</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="nombre"/>
+                <field name="precio"/>
+                <field name="currency_id"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- ========================
+         Acción para abrir los componentes
+    ========================= -->
+    <record id="action_pc_componente" model="ir.actions.act_window">
+        <field name="name">Componentes</field>
+        <field name="res_model">pc.componente</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <!-- ========================
+         Menús
+    ========================= -->
+    <menuitem id="menu_pc_componente"
+              name="Componentes"
+              parent="menu_pc_management_root"
+              action="action_pc_componente"
+              sequence="10"/>
+</odoo>
+

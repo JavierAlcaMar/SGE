@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Archivo de seguridad del módulo pc_management -->
+    <!-- Aquí puedes definir grupos o reglas más adelante si los necesitas -->
+
+    <!-- Ejemplo opcional: grupo para gestionar los ordenadores -->
+    <!--
+    <record id="group_pc_management_user" model="res.groups">
+        <field name="name">Usuario Gestión de Ordenadores</field>
+        <field name="category_id" ref="base.module_category_tools"/>
+    </record>
+    -->
+</odoo>
+

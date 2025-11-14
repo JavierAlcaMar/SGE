@@ -113,6 +113,7 @@ class PcComponente(models.Model):
     )
 ```
     
+
 🖥️ models/ordenador.py
 
 Modelo principal del módulo:
@@ -146,7 +147,8 @@ class PcOrdenador(models.Model):
         for record in self:
             record.precio_total = sum(component.precio for component in record.components_ids)
 ```
-            
+         
+   
 🧠 Funciones importantes
 
 Validación (_comprobar_fecha): evita fechas futuras.
@@ -205,6 +207,7 @@ Vista completa de componentes:
 
 </odoo>
 ```
+
 
 🖥️ views/ordenador_views.xml
 

@@ -55,15 +55,16 @@ los usuarios que los utilizan y diversas automatizaciones avanzadas.
 ### 1️⃣ `__manifest__.py`
 
 El archivo describe el módulo y los datos que carga:
-# -*- coding: utf-8 -*-
+\# -*- coding: utf-8 -*-
+
 {
     'name': "Gestion de Ordenadores",
 
     'summary': "Registro de ordenadores, componentes y usuarios",
 
     'description': """
-Long description of module's purpose
-    """,
+                   Long description of module's purpose
+                   """,
 
     'author': "Javier Alcaraz Martin",
     'website': "https://www.bembes.com",
@@ -83,12 +84,15 @@ Long description of module's purpose
     'installable': True,
     'application': True,
 }
+
 ➡️ Se han eliminado del manifest los archivos no utilizados (views.xml, templates.xml, demo.xml).
 
 ### 2️⃣ Modelos
 
 📦 models/componente.py
+
 Define los componentes de hardware:
+
 from odoo import models, fields
 
 class PcComponente(models.Model):
@@ -106,7 +110,9 @@ class PcComponente(models.Model):
     
     
 🖥️ models/ordenador.py
+
 Modelo principal del módulo:
+
 from odoo import models, fields, api
 from odoo.exceptions import ValidationError
 from datetime import date
@@ -137,6 +143,7 @@ class PcOrdenador(models.Model):
             
             
 🧠 Funciones importantes
+
 Validación (_comprobar_fecha): evita fechas futuras.
 Cálculo automático (_compute_total): suma el precio de los componentes.
 Tags: BONUS de la práctica.
@@ -144,7 +151,9 @@ Tags: BONUS de la práctica.
 ### 3️⃣ Vistas
 
 📦 views/componente_views.xml
+
 Vista completa de componentes:
+
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
 
@@ -193,7 +202,9 @@ Vista completa de componentes:
 
 
 🖥️ views/ordenador_views.xml
+
 Vista de ordenadores:
+
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
 
@@ -252,18 +263,22 @@ Vista de ordenadores:
 
 ### 4️⃣ Seguridad
 
+```
 security/ir.model.access.csv
 Permisos:
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 access_pc_componente,access_pc_componente,model_pc_componente,,1,1,1,1
 access_pc_ordenador,access_pc_ordenador,model_pc_ordenador,,1,1,1,1
+```
 
 
+```
 security/pc_management_security.xml
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <!-- Archivo de seguridad del módulo pc_management -->
 </odoo>
+```
 
 ------------------------------------------------------------------------
 

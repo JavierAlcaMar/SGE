@@ -1,43 +1,59 @@
-📘 Gestión de Ordenadores — Módulo Odoo
-Autor: Javier Alcaraz Martín
+# Gestión de Ordenadores --- Módulo Odoo
 
-🧩 Introducción
-Este módulo ha sido desarrollado como parte de la Tarea 10 – Modelos Avanzados del módulo Sistemas de Gestión Empresarial (2ºDAM).
-Su objetivo es gestionar los ordenadores de la empresa, sus componentes, los usuarios que los utilizan y diversas automatizaciones avanzadas pedidas en el enunciado.
+### Autor: **Javier Alcaraz Martín**
 
-🎯 Funcionalidades principales
-✔ Registro de ordenadores y sus componentes
-✔ Relación Many2one entre ordenadores y usuarios
-✔ Relación Many2many entre ordenadores y componentes
-✔ Validación: la fecha de última modificación no puede ser futura
-✔ Campo calculado automático para el precio total
-✔ Vistas completas (lista y formulario)
-✔ Menús y acciones en la interfaz
-✔ Permisos de acceso configurados
-✔ BONUS: Sistema de tags para indicar sistemas operativos usando many2many_tags
+------------------------------------------------------------------------
 
-🏗️ Estructura del módulo
-pc_management/
-├── __init__.py
-├── __manifest__.py
-├── controllers/         ← No se utiliza en este módulo
-├── demo/                ← Datos demo generados por scaffold (no usados)
-├── models/
-│   ├── __init__.py
-│   ├── componente.py
-│   ├── ordenador.py
-├── security/
-│   ├── ir.model.access.csv
-│   └── pc_management_security.xml
-└── views/
-    ├── componente_views.xml
-    ├── ordenador_views.xml
-    ├── templates.xml     ← No utilizado
-    └── views.xml         ← No utilizado
-Solo se describen los archivos modificados y necesarios.
+## 🧩 Introducción
 
-📁 Archivos del módulo
-1️⃣ __manifest__.py
+Este módulo ha sido desarrollado como parte de la **Tarea 10 -- Modelos
+Avanzados** del módulo **Sistemas de Gestión Empresarial (2ºDAM)**.
+
+Su objetivo es gestionar los ordenadores de la empresa, sus componentes,
+los usuarios que los utilizan y diversas automatizaciones avanzadas.
+
+------------------------------------------------------------------------
+
+## 🎯 Funcionalidades principales
+
+-   Registro de ordenadores y sus componentes\
+-   Relación Many2one entre ordenadores y usuarios\
+-   Relación Many2many entre ordenadores y componentes\
+-   Validación: la fecha de última modificación no puede ser futura\
+-   Campo calculado automático para el precio total\
+-   Vistas completas (lista y formulario)\
+-   Menús y acciones en la interfaz\
+-   Permisos de acceso configurados\
+-   BONUS: Sistema de tags para indicar sistemas operativos
+
+------------------------------------------------------------------------
+
+## 🏗️ Estructura del módulo
+
+    pc_management/
+    ├── __init__.py
+    ├── __manifest__.py
+    ├── controllers/
+    ├── demo/
+    ├── models/
+    │   ├── __init__.py
+    │   ├── componente.py
+    │   ├── ordenador.py
+    ├── security/
+    │   ├── ir.model.access.csv
+    │   └── pc_management_security.xml
+    └── views/
+        ├── componente_views.xml
+        ├── ordenador_views.xml
+        ├── templates.xml
+        └── views.xml
+
+------------------------------------------------------------------------
+
+## 📁 Archivos importantes
+
+### 1️⃣ `__manifest__.py`
+
 El archivo describe el módulo y los datos que carga:
 # -*- coding: utf-8 -*-
 {
@@ -69,7 +85,8 @@ Long description of module's purpose
 }
 ➡️ Se han eliminado del manifest los archivos no utilizados (views.xml, templates.xml, demo.xml).
 
-2️⃣ Modelos
+### 2️⃣ Modelos
+
 📦 models/componente.py
 Define los componentes de hardware:
 from odoo import models, fields
@@ -86,6 +103,7 @@ class PcComponente(models.Model):
         string="Moneda",
         default=lambda self: self.env.company.currency_id
     )
+    
     
 🖥️ models/ordenador.py
 Modelo principal del módulo:
@@ -117,12 +135,14 @@ class PcOrdenador(models.Model):
         for record in self:
             record.precio_total = sum(component.precio for component in record.components_ids)
             
+            
 🧠 Funciones importantes
 Validación (_comprobar_fecha): evita fechas futuras.
 Cálculo automático (_compute_total): suma el precio de los componentes.
 Tags: BONUS de la práctica.
 
-3️⃣ Vistas
+### 3️⃣ Vistas
+
 📦 views/componente_views.xml
 Vista completa de componentes:
 <?xml version="1.0" encoding="utf-8"?>
@@ -170,6 +190,7 @@ Vista completa de componentes:
               sequence="10"/>
 
 </odoo>
+
 
 🖥️ views/ordenador_views.xml
 Vista de ordenadores:
@@ -229,31 +250,34 @@ Vista de ordenadores:
 
 </odoo>
 
-4️⃣ Seguridad
+### 4️⃣ Seguridad
+
 security/ir.model.access.csv
 Permisos:
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 access_pc_componente,access_pc_componente,model_pc_componente,,1,1,1,1
 access_pc_ordenador,access_pc_ordenador,model_pc_ordenador,,1,1,1,1
+
+
 security/pc_management_security.xml
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <!-- Archivo de seguridad del módulo pc_management -->
 </odoo>
 
-🚀 Instalación
-Copiar el módulo a la carpeta de addons de Odoo.
-Reiniciar el servidor.
-En el menú Aplicaciones, pulsar Actualizar lista.
-Instalar Gestión de Ordenadores.
+------------------------------------------------------------------------
 
-📌 Conclusión
-Este módulo implementa todas las funcionalidades pedidas en la Tarea 10, incluyendo:
-✔ Modelos avanzados
-✔ Relaciones M2O y M2M
-✔ Validaciones
-✔ Campos calculados
-✔ Vistas completas
-✔ Menús operativos
-✔ Permisos configurados
-✔ BONUS: widget tags
+## 🚀 Instalación
+
+1.  Copiar el módulo a la carpeta de addons de Odoo.\
+2.  Reiniciar el servidor.\
+3.  Actualizar la lista de aplicaciones.\
+4.  Instalar **Gestión de Ordenadores**.
+
+------------------------------------------------------------------------
+
+## 📌 Conclusión
+
+Este módulo cumple todos los requisitos de la Tarea 10, incluyendo
+relaciones avanzadas, validaciones, cálculos automáticos y menús
+completos.

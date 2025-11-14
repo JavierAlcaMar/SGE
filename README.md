@@ -55,6 +55,8 @@ los usuarios que los utilizan y diversas automatizaciones avanzadas.
 ### 1️⃣ `__manifest__.py`
 
 El archivo describe el módulo y los datos que carga:
+
+```
 \# -*- coding: utf-8 -*-
 
 {
@@ -84,6 +86,7 @@ El archivo describe el módulo y los datos que carga:
     'installable': True,
     'application': True,
 }
+```
 
 ➡️ Se han eliminado del manifest los archivos no utilizados (views.xml, templates.xml, demo.xml).
 
@@ -93,6 +96,7 @@ El archivo describe el módulo y los datos que carga:
 
 Define los componentes de hardware:
 
+```
 from odoo import models, fields
 
 class PcComponente(models.Model):
@@ -107,12 +111,13 @@ class PcComponente(models.Model):
         string="Moneda",
         default=lambda self: self.env.company.currency_id
     )
-    
+```
     
 🖥️ models/ordenador.py
 
 Modelo principal del módulo:
 
+```
 from odoo import models, fields, api
 from odoo.exceptions import ValidationError
 from datetime import date
@@ -140,13 +145,12 @@ class PcOrdenador(models.Model):
     def _compute_total(self):
         for record in self:
             record.precio_total = sum(component.precio for component in record.components_ids)
-            
+```
             
 🧠 Funciones importantes
 
 Validación (_comprobar_fecha): evita fechas futuras.
 Cálculo automático (_compute_total): suma el precio de los componentes.
-Tags: BONUS de la práctica.
 
 ### 3️⃣ Vistas
 
@@ -154,6 +158,7 @@ Tags: BONUS de la práctica.
 
 Vista completa de componentes:
 
+```
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
 
@@ -199,12 +204,13 @@ Vista completa de componentes:
               sequence="10"/>
 
 </odoo>
-
+```
 
 🖥️ views/ordenador_views.xml
 
 Vista de ordenadores:
 
+```
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
 
@@ -260,6 +266,7 @@ Vista de ordenadores:
               sequence="20"/>
 
 </odoo>
+```
 
 ### 4️⃣ Seguridad
 

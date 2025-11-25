@@ -313,7 +313,7 @@ Este módulo proporciona un sistema completo para gestionar **paquetes**, **cami
 
 ---
 
-# 📁 1. Estructura del Módulo
+## 📁 1. Estructura del Módulo
 
 ```
 paqueteria/
@@ -349,7 +349,7 @@ Cada carpeta incluye elementos clave como:
 
 ---
 
-# 📦 2. Funcionalidades Principales
+## 📦 2. Funcionalidades Principales
 
 ### ✔️ Gestión de Paquetes
 Permite administrar:
@@ -381,9 +381,9 @@ Los eventos se ordenan cronológicamente y permiten trazar el recorrido del paqu
 
 ---
 
-# 🧩 3. Modelos Explicados
+## 🧩 3. Modelos Explicados
 
-## 📌 3.1 Modelo `paqueteria.paquete`
+### 📌 3.1 Modelo `paqueteria.paquete`
 
 ```python
 tracking = fields.Char(required=True)
@@ -408,7 +408,7 @@ actualizaciones_ids = fields.One2many("paqueteria.seguimiento", "paquete_id")
 
 ---
 
-## 📌 3.2 Modelo `paqueteria.camion`
+### 📌 3.2 Modelo `paqueteria.camion`
 
 ```python
 matricula = fields.Char(required=True)
@@ -426,7 +426,7 @@ paquetes_ids = fields.One2many("paqueteria.paquete", "camion_id")
 
 ---
 
-## 📌 3.3 Modelo `paqueteria.seguimiento`
+### 📌 3.3 Modelo `paqueteria.seguimiento`
 
 ```python
 paquete_id = fields.Many2one("paqueteria.paquete", required=True, ondelete="cascade")
@@ -450,9 +450,9 @@ Es un registro histórico del envío.
 
 ---
 
-# 🖼️ 4. Vistas XML
+## 🖼️ 4. Vistas XML
 
-## 📄 4.1 `paquete_views.xml`
+### 📄 4.1 `paquete_views.xml`
 Incluye:
 - Vista listado (árbol).
 - Vista formulario.
@@ -463,7 +463,7 @@ Muestra campos clave como tracking, remitente, destinatario y estado del paquete
 
 ---
 
-## 🚚 4.2 `camion_views.xml`
+### 🚚 4.2 `camion_views.xml`
 Incluye:
 - Lista con matrícula, conductor y ITV.
 - Formulario del camión.
@@ -471,7 +471,7 @@ Incluye:
 
 ---
 
-## 📍 4.3 `seguimiento_views.xml`
+### 📍 4.3 `seguimiento_views.xml`
 Permite gestionar:
 - Nuevos eventos de seguimiento.
 - Orden cronológico.
@@ -479,7 +479,7 @@ Permite gestionar:
 
 ---
 
-## 📋 4.4 `menu_views.xml`
+### 📋 4.4 `menu_views.xml`
 Define la estructura principal:
 
 ```
@@ -491,7 +491,7 @@ Paquetería
 
 ---
 
-# 🔐 5. Seguridad del Módulo
+## 🔐 5. Seguridad del Módulo
 
 ### ✔️ `ir.model.access.csv`
 Define permisos de lectura, escritura, creación y eliminación.
@@ -509,7 +509,7 @@ Reglas de acceso basadas en dominios si se aplican.
 
 ---
 
-# ⚙️ 6. Manifest (`__manifest__.py`)
+## ⚙️ 6. Manifest (`__manifest__.py`)
 
 Contiene:
 - Nombre del módulo  
@@ -525,7 +525,7 @@ Es el archivo inicial que Odoo lee para cargar el módulo.
 
 ---
 
-# 🧪 7. Datos Demo
+## 🧪 7. Datos Demo
 
 Incluye ejemplos de:
 - Paquetes
@@ -536,7 +536,7 @@ Incluye ejemplos de:
 
 ---
 
-# 🛠️ 8. Instalación
+## 🛠️ 8. Instalación
 
 1. Copia la carpeta `paqueteria` a tu directorio de `addons`.
 2. Reinicia Odoo:

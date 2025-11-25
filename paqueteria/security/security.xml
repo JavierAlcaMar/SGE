@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record model="ir.module.category" id="module_paqueteria_category">
+            <field name="name">Paqueteria</field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,24 @@
+<odoo>
+
+    <!-- CATEGORÍA DE PERMISOS (opción 2: separada completamente) -->
+    <record id="module_category_paqueteria" model="ir.module.category">
+        <field name="name">   Paquetería</field>  <!-- 3 espacios delante -->
+        <field name="description">Permisos del módulo Paquetería</field>
+        <field name="sequence">300</field>        <!-- Muy alta para separarla -->
+    </record>
+
+    <!-- Grupo de usuario estándar -->
+    <record id="group_paqueteria_user" model="res.groups">
+        <field name="name">Usuario Paquetería</field>
+        <field name="category_id" ref="paqueteria.module_category_paqueteria"/>
+    </record>
+
+    <!-- Grupo de administrador -->
+    <record id="group_paqueteria_manager" model="res.groups">
+        <field name="name">Administrador Paquetería</field>
+        <field name="category_id" ref="paqueteria.module_category_paqueteria"/>
+        <field name="implied_ids" eval="[(4, ref('paqueteria.group_paqueteria_user'))]"/>
+    </record>
+
+</odoo>
+

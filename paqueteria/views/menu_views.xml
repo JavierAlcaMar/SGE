@@ -1,0 +1,54 @@
+<odoo>
+    <!-- Menú raíz (sin groups para que se cree siempre) -->
+    <menuitem id="menu_paqueteria_root"
+              name="Paquetería"
+              sequence="10"/>
+
+    <!-- Añadimos permisos al menú raíz -->
+    <record id="menu_paqueteria_root" model="ir.ui.menu">
+        <field name="groups_id" eval="[(4, ref('paqueteria.group_paqueteria_user'))]"/>
+    </record>
+
+    <!-- Acción y menú de Paquetes -->
+    <record id="action_paqueteria_paquete" model="ir.actions.act_window">
+        <field name="name">Paquetes</field>
+        <field name="res_model">paqueteria.paquete</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <menuitem id="menu_paqueteria_paquetes"
+              parent="menu_paqueteria_root"
+              name="Paquetes"
+              action="action_paqueteria_paquete"
+              sequence="20"
+              groups="paqueteria.group_paqueteria_user"/>
+
+    <!-- Acción y menú Seguimiento -->
+    <record id="action_paqueteria_seguimiento" model="ir.actions.act_window">
+        <field name="name">Seguimiento</field>
+        <field name="res_model">paqueteria.seguimiento</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <menuitem id="menu_paqueteria_seguimiento"
+              parent="menu_paqueteria_root"
+              name="Seguimiento"
+              action="action_paqueteria_seguimiento"
+              sequence="30"
+              groups="paqueteria.group_paqueteria_manager"/>
+
+    <!-- Acción y menú de Camiones -->
+    <record id="action_paqueteria_camion" model="ir.actions.act_window">
+        <field name="name">Camiones</field>
+        <field name="res_model">paqueteria.camion</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <menuitem id="menu_paqueteria_camiones"
+              parent="menu_paqueteria_root"
+              name="Camiones"
+              action="action_paqueteria_camion"
+              sequence="40"
+              groups="paqueteria.group_paqueteria_user"/>
+</odoo>
+

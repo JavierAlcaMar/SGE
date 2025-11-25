@@ -1,0 +1,49 @@
+<odoo>
+    <!-- Vista de lista de camiones -->
+    <record id="view_paqueteria_camion_list" model="ir.ui.view">
+        <field name="name">paqueteria.camion.list</field>
+        <field name="model">paqueteria.camion</field>
+        <field name="arch" type="xml">
+            <list string="Camiones">
+                <field name="matricula"/>
+                <field name="conductor_actual_id"/>
+                <field name="fecha_itv"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Vista de formulario de camiones -->
+    <record id="view_paqueteria_camion_form" model="ir.ui.view">
+        <field name="name">paqueteria.camion.form</field>
+        <field name="model">paqueteria.camion</field>
+        <field name="arch" type="xml">
+            <form string="Camión">
+                <sheet>
+                    <group>
+                        <field name="matricula"/>
+                        <field name="conductor_actual_id"/>
+                        <field name="antiguos_conductores_ids"/>
+                    </group>
+
+                    <group>
+                        <field name="fecha_itv"/>
+                        <field name="notas_mantenimiento"/>
+                    </group>
+
+                    <notebook>
+                        <page string="Paquetes transportados">
+                            <field name="paquetes_ids">
+                                <list>
+                                    <field name="tracking"/>
+                                    <field name="destinatario_id"/>
+                                    <field name="municipio"/>
+                                </list>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+</odoo>
+

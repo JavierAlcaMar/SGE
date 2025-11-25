@@ -1,0 +1,8 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+paquete_user,paquete_user,model_paqueteria_paquete,paqueteria.group_paqueteria_user,1,0,0,0
+paquete_manager,paquete_manager,model_paqueteria_paquete,paqueteria.group_paqueteria_manager,1,1,1,1
+seguimiento_user,seguimiento_user,model_paqueteria_seguimiento,paqueteria.group_paqueteria_user,1,0,0,0
+seguimiento_manager,seguimiento_manager,model_paqueteria_seguimiento,paqueteria.group_paqueteria_manager,1,1,1,1
+camion_user,camion_user,model_paqueteria_camion,paqueteria.group_paqueteria_user,1,0,0,0
+camion_manager,camion_manager,model_paqueteria_camion,paqueteria.group_paqueteria_manager,1,1,1,1
+

@@ -1,7 +1,5 @@
 # Gestión de Ordenadores --- Módulo Odoo
 
-### Autor: **Javier Alcaraz Martín**
-
 ------------------------------------------------------------------------
 
 ## 🧩 Introducción
@@ -290,7 +288,7 @@ security/pc_management_security.xml
 </odoo>
 ```
 
-------------------------------------------------------------------------
+---
 
 ## 🚀 Instalación
 
@@ -299,10 +297,259 @@ security/pc_management_security.xml
 3.  Actualizar la lista de aplicaciones.\
 4.  Instalar **Gestión de Ordenadores**.
 
-------------------------------------------------------------------------
+---
 
 ## 📌 Conclusión
 
 Este módulo cumple todos los requisitos de la Tarea 10, incluyendo
 relaciones avanzadas, validaciones, cálculos automáticos y menús
 completos.
+
+-------------------------------------------------------------------------
+
+# 🚚 Gestión de Paquetería y Camiones — Documentación del Módulo Odoo
+
+Este módulo proporciona un sistema completo para gestionar **paquetes**, **camiones**, **conductores** y el **seguimiento detallado de envíos** dentro de una empresa de transportes. Está diseñado siguiendo las buenas prácticas de desarrollo en Odoo, ofreciendo trazabilidad, organización y una estructura clara.
+
+---
+
+# 📁 1. Estructura del Módulo
+
+```
+paqueteria/
+├── models/
+│   ├── paquete.py
+│   ├── camion.py
+│   ├── seguimiento.py
+│   └── __init__.py
+├── views/
+│   ├── paquete_views.xml
+│   ├── camion_views.xml
+│   ├── seguimiento_views.xml
+│   ├── menu_views.xml
+│   ├── templates.xml
+│   └── views.xml
+├── security/
+│   ├── ir.model.access.csv
+│   ├── paqueteria_security.xml
+│   └── security.xml
+├── demo/
+│   └── demo.xml
+├── static/description/index.html
+├── __manifest__.py
+└── __init__.py
+```
+
+Cada carpeta incluye elementos clave como:
+- **models** → Lógica de negocio y estructura de datos.
+- **views** → Interfaces XML de listas, formularios y menús.
+- **security** → Permisos y reglas de acceso.
+- **demo** → Datos de ejemplo.
+- **static** → Archivos visuales para la vista previa en la App Store de Odoo.
+
+---
+
+# 📦 2. Funcionalidades Principales
+
+### ✔️ Gestión de Paquetes
+Permite administrar:
+- Número de seguimiento.
+- Remitente y destinatario.
+- Dirección de entrega.
+- Peso y contenido.
+- Camión asignado.
+- Historial detallado del seguimiento del envío.
+
+### ✔️ Gestión de Camiones
+Incluye:
+- Matrícula.
+- Conductor actual.
+- Historial de conductores anteriores.
+- Fecha de ITV.
+- Notas de mantenimiento.
+- Paquetes relacionados.
+
+### ✔️ Seguimiento de Envíos
+Permite registrar:
+- Fecha exacta del evento.
+- Estado del paquete.
+- Ubicación.
+- Notas opcionales.
+- Asociación directa con un paquete.
+
+Los eventos se ordenan cronológicamente y permiten trazar el recorrido del paquete.
+
+---
+
+# 🧩 3. Modelos Explicados
+
+## 📌 3.1 Modelo `paqueteria.paquete`
+
+```python
+tracking = fields.Char(required=True)
+remitente_id = fields.Many2one("res.partner", required=True)
+destinatario_id = fields.Many2one("res.partner", required=True)
+direccion_entrega = fields.Char()
+peso = fields.Float()
+descripcion = fields.Text()
+camion_id = fields.Many2one("paqueteria.camion")
+actualizaciones_ids = fields.One2many("paqueteria.seguimiento", "paquete_id")
+```
+
+### 📝 Explicación
+- **tracking**: Identificador único del envío.  
+- **remitente/destinatario**: Integración directa con el módulo de contactos de Odoo.  
+- **camion_id**: Permite asignar un vehículo al envío.  
+- **actualizaciones_ids**: Registro cronológico del seguimiento.
+
+### 🔧 Comportamiento
+- Al crear un paquete, puedes asignarle un camión opcionalmente.
+- El historial del envío se muestra como una lista inteligente dentro del formulario.
+
+---
+
+## 📌 3.2 Modelo `paqueteria.camion`
+
+```python
+matricula = fields.Char(required=True)
+conductor_actual_id = fields.Many2one("hr.employee")
+antiguos_conductores_ids = fields.Many2many("hr.employee")
+fecha_itv = fields.Date()
+notas_mantenimiento = fields.Text()
+paquetes_ids = fields.One2many("paqueteria.paquete", "camion_id")
+```
+
+### 📝 Explicación
+- Control de flota mediante matrícula y conductores.
+- Historial de mantenimiento.
+- Consulta rápida de paquetes transportados.
+
+---
+
+## 📌 3.3 Modelo `paqueteria.seguimiento`
+
+```python
+paquete_id = fields.Many2one("paqueteria.paquete", required=True, ondelete="cascade")
+fecha = fields.Datetime(default=fields.Datetime.now)
+ubicacion = fields.Char()
+estado = fields.Selection([...], required=True)
+notas = fields.Text()
+```
+
+### 📝 Explicación
+- **fecha**: Se genera automáticamente.
+- **estado**: Ciclo del paquete:
+  - recibido  
+  - en camino  
+  - en reparto  
+  - entregado  
+  - incidencia  
+- **ondelete="cascade"**: si se borra el paquete, se eliminan sus seguimientos.
+
+Es un registro histórico del envío.
+
+---
+
+# 🖼️ 4. Vistas XML
+
+## 📄 4.1 `paquete_views.xml`
+Incluye:
+- Vista listado (árbol).
+- Vista formulario.
+- Búsquedas.
+- Acciones inteligentes.
+
+Muestra campos clave como tracking, remitente, destinatario y estado del paquete.
+
+---
+
+## 🚚 4.2 `camion_views.xml`
+Incluye:
+- Lista con matrícula, conductor y ITV.
+- Formulario del camión.
+- Sección de paquetes asignados.
+
+---
+
+## 📍 4.3 `seguimiento_views.xml`
+Permite gestionar:
+- Nuevos eventos de seguimiento.
+- Orden cronológico.
+- Relación directa con el paquete.
+
+---
+
+## 📋 4.4 `menu_views.xml`
+Define la estructura principal:
+
+```
+Paquetería
+ ├── Paquetes
+ ├── Camiones
+ └── Seguimientos
+```
+
+---
+
+# 🔐 5. Seguridad del Módulo
+
+### ✔️ `ir.model.access.csv`
+Define permisos de lectura, escritura, creación y eliminación.
+
+Ejemplo:
+```
+paqueteria.paquete,access_paqueteria_paquete,model_paqueteria_paquete,base.group_user,1,1,1,1
+```
+
+### ✔️ `paqueteria_security.xml`
+Define grupos y permisos adicionales.
+
+### ✔️ `security.xml`
+Reglas de acceso basadas en dominios si se aplican.
+
+---
+
+# ⚙️ 6. Manifest (`__manifest__.py`)
+
+Contiene:
+- Nombre del módulo  
+- Autor  
+- Descripción  
+- Versionado  
+- Dependencias  
+- Vistas, modelos y seguridad cargada  
+- Datos demo  
+- Configuración como aplicación  
+
+Es el archivo inicial que Odoo lee para cargar el módulo.
+
+---
+
+# 🧪 7. Datos Demo
+
+Incluye ejemplos de:
+- Paquetes
+- Camiones
+- Seguimientos
+
+Útiles para pruebas iniciales.
+
+---
+
+# 🛠️ 8. Instalación
+
+1. Copia la carpeta `paqueteria` a tu directorio de `addons`.
+2. Reinicia Odoo:
+```bash
+sudo systemctl restart odoo
+```
+3. Activa modo desarrollador.
+4. Actualiza lista de módulos.
+5. Instala **Gestión de Paquetería y Camiones**.
+
+---
+
+# ✨ Autor
+### Autor: **Javier Alcaraz Martín**
+
+---

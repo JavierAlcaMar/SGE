@@ -1,4 +1,4 @@
-# Gestión de Ordenadores --- Módulo Odoo
+# 🖥️ Gestión de Ordenadores --- Módulo Odoo
 
 ------------------------------------------------------------------------
 

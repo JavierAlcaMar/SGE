@@ -1,4 +1,4 @@
-# 🖥️ Gestión de Ordenadores --- Módulo Odoo
+# 🖥️ Gestión de Ordenadores
 
 ------------------------------------------------------------------------
 
@@ -307,7 +307,7 @@ completos.
 
 -------------------------------------------------------------------------
 
-# 🚚 Gestión de Paquetería y Camiones — Documentación del Módulo Odoo
+# 🚚 Gestión de Paquetería y Camiones
 
 Este módulo proporciona un sistema completo para gestionar **paquetes**, **camiones**, **conductores** y el **seguimiento detallado de envíos** dentro de una empresa de transportes. Está diseñado siguiendo las buenas prácticas de desarrollo en Odoo, ofreciendo trazabilidad, organización y una estructura clara.
 

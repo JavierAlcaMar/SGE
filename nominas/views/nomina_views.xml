@@ -1,0 +1,172 @@
+<odoo>
+
+    <!-- LISTA DE NÓMINAS -->
+    <record id="view_sge_nomina_list" model="ir.ui.view">
+        <field name="name">sge.nomina.list</field>
+        <field name="model">sge.nomina</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="employee_id"/>
+                <field name="fecha"/>
+                <field name="sueldo_base"/>
+                <field name="irpf"/>
+                <field name="irpf_pagado"/>
+                <field name="total_neto"/>
+                <field name="state"/>
+            </list>
+        </field>
+    </record>
+
+
+    <!-- FORMULARIO DE NÓMINA -->
+    <record id="view_sge_nomina_form" model="ir.ui.view">
+        <field name="name">sge.nomina.form</field>
+        <field name="model">sge.nomina</field>
+        <field name="arch" type="xml">
+            <form string="Nómina">
+
+                <header>
+                    <!-- Botón para volver a borrador -->
+                    <button name="action_set_draft"
+                            type="object"
+                            string="Borrador"
+                            invisible="state not in ['confirm','paid']"/>
+
+                    <!-- Botón para confirmar -->
+                    <button name="action_confirm"
+                            type="object"
+                            string="Confirmar"
+                            invisible="state != 'draft'"/>
+
+                    <!-- Botón para marcar como pagada -->
+                    <button name="action_paid"
+                            type="object"
+                            string="Marcar pagada"
+                            invisible="state != 'confirm'"/>
+
+                    <field name="state" widget="statusbar" statusbar_visible="draft,confirm,paid"/>
+                </header>
+
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="employee_id"/>
+                            <field name="fecha"/>
+                        </group>
+                        <group>
+                            <field name="sueldo_base"/>
+                            <field name="irpf"/>
+                            <field name="irpf_pagado" readonly="1"/>
+                        </group>
+                    </group>
+
+                    <notebook>
+
+                        <!-- Pestaña de líneas (bonificaciones + deducciones) -->
+                        <page string="Bonificaciones y Deducciones">
+                            <field name="line_ids">
+                                <list editable="bottom">
+                                    <field name="concepto"/>
+                                    <field name="tipo"/>
+                                    <field name="importe"/>
+                                </list>
+                            </field>
+                        </page>
+
+                        <!-- Pestaña de totales -->
+                        <page string="Totales">
+                            <group>
+                                <field name="total_bonificaciones"/>
+                                <field name="total_deducciones"/>
+                                <field name="total_bruto"/>
+                                <field name="total_neto"/>
+                            </group>
+                        </page>
+
+                        <!-- PDF justificante -->
+                        <page string="Justificante PDF">
+                            <group>
+                                <field name="pdf_justificante" filename="pdf_filename"/>
+                            </group>
+                        </page>
+
+                    </notebook>
+
+                </sheet>
+
+            </form>
+        </field>
+    </record>
+
+
+    <!-- LISTA DECLARACIONES DE RENTA -->
+    <record id="view_sge_declaracion_renta_list" model="ir.ui.view">
+        <field name="name">sge.declaracion.renta.list</field>
+        <field name="model">sge.declaracion.renta</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="employee_id"/>
+                <field name="year"/>
+                <field name="sueldo_bruto_total"/>
+                <field name="impuestos_irpf_pagados"/>
+            </list>
+        </field>
+    </record>
+
+
+    <!-- FORMULARIO DECLARACIÓN DE RENTA -->
+    <record id="view_sge_declaracion_renta_form" model="ir.ui.view">
+        <field name="name">sge.declaracion.renta.form</field>
+        <field name="model">sge.declaracion.renta</field>
+        <field name="arch" type="xml">
+            <form string="Declaración de Renta">
+                <sheet>
+
+                    <group>
+                        <field name="employee_id"/>
+                        <field name="year"/>
+                    </group>
+
+                    <group string="Totales">
+                        <field name="sueldo_bruto_total"/>
+                        <field name="impuestos_irpf_pagados"/>
+                    </group>
+
+                    <group string="Nóminas incluidas">
+                        <field name="nomina_ids" widget="many2many_tags"/>
+                    </group>
+
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+
+    <!-- ACCIONES -->
+    <record id="action_sge_nomina" model="ir.actions.act_window">
+        <field name="name">Nóminas</field>
+        <field name="res_model">sge.nomina</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <record id="action_sge_declaracion_renta" model="ir.actions.act_window">
+        <field name="name">Declaraciones de renta</field>
+        <field name="res_model">sge.declaracion.renta</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+
+    <!-- MENÚ -->
+    <menuitem id="menu_sge_nomina_root" name="Nóminas" sequence="10"/>
+
+    <menuitem id="menu_sge_nominas"
+              parent="menu_sge_nomina_root"
+              name="Nóminas de empleados"
+              action="action_sge_nomina"/>
+
+    <menuitem id="menu_sge_declaracion"
+              parent="menu_sge_nomina_root"
+              name="Declaraciones de renta"
+              action="action_sge_declaracion_renta"/>
+
+</odoo>

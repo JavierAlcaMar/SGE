@@ -1,6 +1,6 @@
-![Captura1](./Imagenes/cap1)
+![Captura1](./Imagenes/cap1.png)
 
-![Captura2](./Imagenes/cap2)
+![Captura2](./Imagenes/cap2.png)
 
-![Captura3](./Imagenes/cap3)
+![Captura3](./Imagenes/cap3.png)
 

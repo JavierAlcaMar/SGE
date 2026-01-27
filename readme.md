@@ -125,7 +125,7 @@ Este módulo ha sido desarrollado como práctica de la asignatura **SGE**, demos
 
 ---
 
-## 🌅 Imagenes del modulo funcionando
+## 🌅 Imágenes
 
 ![Imagen 1](imagenes/1.png)
 
@@ -138,6 +138,7 @@ Este módulo ha sido desarrollado como práctica de la asignatura **SGE**, demos
 ![Imagen 5](imagenes/5.png)
 
 ---
+
 ## ✍️ Autor
 
 Alumno: *Javier Alcaraz Martín*  

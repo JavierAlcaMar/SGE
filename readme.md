@@ -125,14 +125,6 @@ Este módulo ha sido desarrollado como práctica de la asignatura **SGE**, demos
 
 ---
 
-## ✍️ Autor
-
-Alumno: *Javier Alcaraz Martín*  
-Curso: DAM  
-Asignatura: Sistemas de Gestión Empresarial
-
----
-
 ## 🌅 Imagenes del modulo funcionando
 
 ![Imagen 1](imagenes/1.png)
@@ -144,6 +136,13 @@ Asignatura: Sistemas de Gestión Empresarial
 ![Imagen 4](imagenes/4.png)
 
 ![Imagen 5](imagenes/5.png)
+
+---
+## ✍️ Autor
+
+Alumno: *Javier Alcaraz Martín*  
+Curso: DAM  
+Asignatura: Sistemas de Gestión Empresarial
 
 ---
 

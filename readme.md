@@ -135,15 +135,15 @@ Asignatura: Sistemas de Gestión Empresarial
 
 ## 🌅 Imagenes del modulo funcionando
 
-![Imagen 1](imagen/1.png)
+![Imagen 1](imagenes/1.png)
 
-![Imagen 2](imagen/2.png)
+![Imagen 2](imagenes/2.png)
 
-![Imagen 3](imagen/3.png)
+![Imagen 3](imagenes/3.png)
 
-![Imagen 4](imagen/4.png)
+![Imagen 4](imagenes/4.png)
 
-![Imagen 5](imagen/5.png)
+![Imagen 5](imagenes/5.png)
 
 ---
 
